@@ -1,0 +1,18 @@
+const int buttonPin = 3; // SIG2 của nút bấm nối với D3
+
+void setup() {
+  pinMode(buttonPin, INPUT);      // Chân nút bấm là đầu vào
+  pinMode(LED_BUILTIN, OUTPUT);   // LED tích hợp là đầu ra
+  Serial.begin(9600);             // Để kiểm tra
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin);
+  Serial.println(buttonState);    // In trạng thái nút
+  if (buttonState == LOW) {       // Nhấn nút (LOW) -> Bật LED
+    digitalWrite(LED_BUILTIN, HIGH);
+  } else {                        // Thả nút (HIGH) -> Tắt LED
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  delay(100);                     // Chậm lại để tránh nhiễu
+}
