@@ -1,0 +1,22 @@
+
+#include<Wire.h>
+#include<Adafruit_ADS1X15.h>
+Adafruit_ADS1115 ads;
+const int led=13;// cấu hình led ở chân thứ 13
+void setup() {
+  Serial.begin(9600);
+  ads.begin();
+  pinMode(led,OUTPUT);
+}
+
+void loop() {
+  int value= ads.readADC_SingleEnded(0);// đọc giá trị ở chân A0 của cảm biến âm thanh
+  float giatri=ads.computeVolts(value);// chuyển từ giá trị analog vừa đọc được sang giá trị V
+  if(giatri>0.05)
+  {
+    digitalWrite(led,HIGH);
+    Serial.println("led sáng");
+  }
+  else digitalWrite(led,LOW);
+  delay(1000);
+}
